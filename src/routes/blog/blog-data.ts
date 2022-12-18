@@ -1,4 +1,6 @@
-export const posts = [
+import type { Blog } from '$lib/types';
+
+export const posts: Blog[] = [
 	{
 		slug: 'my-blog-01',
 		title: 'My Blog 01',
