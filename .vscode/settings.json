@@ -1,3 +1,5 @@
 {
-    "liveServer.settings.root": "build"
+	"liveServer.settings.root": "build",
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode"
 }
