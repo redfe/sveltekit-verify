@@ -1,20 +1,6 @@
 <script>
-	import { onMount } from 'svelte';
-
 	// @ts-ignore
-	let data = { summaries: [] };
-
-	onMount(async () => {
-		const response = await fetch('/blog/api');
-		const posts = await response.json();
-		data = {
-			// @ts-ignore
-			summaries: posts.map((post) => ({
-				slug: post.slug,
-				title: post.title
-			}))
-		};
-	});
+	export let data = { summaries: [] };
 </script>
 
 <ul>
