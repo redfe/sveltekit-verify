@@ -1,6 +1,6 @@
-<script>
-	// @ts-ignore
-	export let data;
+<script lang="ts">
+	import type { BlogSummary } from '$lib/types';
+	export let data: { summaries: [BlogSummary] };
 </script>
 
 <ul>
