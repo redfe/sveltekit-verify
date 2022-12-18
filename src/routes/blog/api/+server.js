@@ -14,9 +14,10 @@ const posts = [
 ];
 
 // @ts-ignore
-export function GET({ params }) {
-	if (params.slug) {
-		return json(posts.find((post) => post.slug === params.slug));
+export const GET = ({ url }) => {
+	const slug = url.searchParams.get('slug') ?? '';
+	if (slug) {
+		return json(posts.find((post) => post.slug === slug));
 	}
 	return json(posts);
-}
+};
