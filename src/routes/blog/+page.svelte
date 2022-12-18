@@ -1,0 +1,10 @@
+<script>
+	// @ts-nocheck
+	export let data;
+</script>
+
+<ul>
+	{#each data.summaries as post}
+		<li><a href="/blog/{post.slug}">{post.title}</a></li>
+	{/each}
+</ul>
