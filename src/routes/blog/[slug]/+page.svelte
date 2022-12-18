@@ -1,5 +1,5 @@
 <script>
-	export let data = { post: {} };
+	export let data;
 </script>
 
 <h2>{data.post.title}</h2>

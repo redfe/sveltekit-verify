@@ -1,4 +1,4 @@
-import { posts } from '../data.js';
+import { posts } from '../blog-data.js';
 import { error } from '@sveltejs/kit';
 
 // @ts-ignore

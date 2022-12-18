@@ -1,6 +1,6 @@
 <script>
 	// @ts-ignore
-	export let data = { summaries: [] };
+	export let data;
 </script>
 
 <ul>
