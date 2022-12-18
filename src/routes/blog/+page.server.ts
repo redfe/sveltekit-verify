@@ -1,12 +1,14 @@
 import type { PageServerLoad } from './$types';
+import type { BlogSummary } from '$lib/types';
 import { posts } from './blog-data.js';
 
 export const load = (({ locals }) => {
 	console.log('######', locals.user);
-	return {
-		summaries: posts.map((post) => ({
-			slug: post.slug,
-			title: post.title
-		}))
-	};
+
+	const summaries: BlogSummary[] = posts.map((post) => ({
+		slug: post.slug,
+		title: post.title
+	}));
+
+	return { summaries };
 }) satisfies PageServerLoad;
