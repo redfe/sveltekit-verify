@@ -1,7 +1,9 @@
-import { posts } from './data.js';
+export async function load() {
+	const response = await fetch('http://localhost:5173/blog/api');
+	const posts = await response.json();
 
-export function load() {
 	return {
+		// @ts-ignore
 		summaries: posts.map((post) => ({
 			slug: post.slug,
 			title: post.title
