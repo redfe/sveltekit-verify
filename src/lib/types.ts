@@ -1,10 +1,11 @@
 export interface BlogSummary {
-    slug: string;
-    title: string;
+	slug: string;
+	title: string;
 }
 
 export interface Blog {
-    slug: string;
-    title: string;
-    content: string;
+	slug: string;
+	title: string;
+	content: string;
+	postDateTime: Date;
 }
