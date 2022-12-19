@@ -9,8 +9,8 @@ on:
     branches:
       - main
 env:
-  COSMOS_ENDPOINT: ${{secret.COSMOS_ENDPOINT}}
-  COSMOS_KEY: ${{secret.COSMOS_KEY}}
+  COSMOS_ENDPOINT: ${{secrets.COSMOS_ENDPOINT}}
+  COSMOS_KEY: ${{secrets.COSMOS_KEY}}
 jobs:
   test:
     timeout-minutes: 60
