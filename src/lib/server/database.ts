@@ -37,3 +37,14 @@ export const add = async (blog: Blog) => {
 	const container = await getContainer();
 	await container.items.create(blog);
 };
+
+export const remove = async (slug: string) => {
+	const container = await getContainer();
+	const { resources } = await container.items
+		.query(`SELECT * from c where c.slug = "${slug}"`)
+		.fetchAll();
+	resources.forEach((blog) => {
+		console.log(blog);
+		container.item(blog.id, blog.postDateTime).delete();
+	});
+};

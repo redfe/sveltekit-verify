@@ -13,6 +13,13 @@
 </form>
 <ul>
 	{#each data.summaries as post}
-		<li><a href="/blog/{post.slug}">{post.title}</a></li>
+		<li>
+			<form method="POST" action="?/remove" style="display: inline;">
+				<input type="hidden" name="slug" value={post.slug} />
+				<button>x</button>
+			</form>
+
+			<a href="/blog/{post.slug}">{post.title}</a>
+		</li>
 	{/each}
 </ul>

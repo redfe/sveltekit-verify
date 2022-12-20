@@ -26,5 +26,9 @@ export const actions = {
 			postDateTime: new Date()
 		};
 		await db.add(blog);
+	}) satisfies Action,
+	remove: (async ({ request }) => {
+		const data = await request.formData();
+		await db.remove(data.get('slug') as string);
 	}) satisfies Action
 };
