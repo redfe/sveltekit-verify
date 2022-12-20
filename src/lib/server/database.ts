@@ -44,7 +44,6 @@ export const remove = async (slug: string) => {
 		.query(`SELECT * from c where c.slug = "${slug}"`)
 		.fetchAll();
 	resources.forEach((blog) => {
-		console.log(blog);
 		container.item(blog.id, blog.postDateTime).delete();
 	});
 };
