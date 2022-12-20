@@ -8,8 +8,7 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: azure(),
-		csrf: false
+		adapter: azure()
 	}
 };
 
