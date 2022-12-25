@@ -12,13 +12,8 @@ const config = {
 			customStaticWebAppConfig: {
 				routes: [
 					{
-						route: '/login',
-						redirect: '/.auth/login/github',
-						allowedRoles: ['admin']
-					},
-					{
-						route: '/blog',
-						allowedRoles: ['admin']
+						route: '/blog/*',
+						allowedRoles: ['authenticated']
 					}
 				],
 				responseOverrides: {
