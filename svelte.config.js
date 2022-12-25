@@ -17,7 +17,7 @@ const config = {
 						allowedRoles: ['admin']
 					},
 					{
-						route: '/*',
+						route: '/blog',
 						allowedRoles: ['admin']
 					}
 				],
