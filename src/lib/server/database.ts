@@ -9,9 +9,12 @@ const databaseName = 'misc';
 const containerName = 'blogs';
 const partitionKeyPath = ['/slug'];
 const uniqueKeyPath = ['/slug', '/type'];
-const cosmosClient = new CosmosClient({ endpoint, key });
+let cosmosClient: CosmosClient;
 
 const getDatabase = async () => {
+	if (!cosmosClient) {
+		cosmosClient = new CosmosClient({ endpoint, key });
+	}
 	const { database } = await cosmosClient.databases.createIfNotExists({ id: databaseName });
 	return database;
 };
