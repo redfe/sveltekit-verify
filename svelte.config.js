@@ -8,7 +8,23 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: azure()
+		adapter: azure({
+			customStaticWebAppConfig: {
+				routes: [
+					{
+						route: '/login',
+						redirect: '/.auth/login/github',
+						allowedRoles: ['admin']
+					}
+				],
+				responseOverrides: {
+					401: {
+						redirect: '/login',
+						statusCode: 302
+					}
+				}
+			}
+		})
 	}
 };
 
