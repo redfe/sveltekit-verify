@@ -9,6 +9,7 @@ export const load = (async ({ locals }) => {
 	const posts = await db.getAll();
 
 	const summaries: BlogSummary[] = posts.map((post) => ({
+		id: post.id,
 		slug: post.slug,
 		title: post.title
 	}));
@@ -38,6 +39,6 @@ export const actions = {
 	}) satisfies Action,
 	remove: (async ({ request }) => {
 		const data = await request.formData();
-		await db.remove(data.get('slug') as string);
+		await db.remove(data.get('id') as string, data.get('slug') as string);
 	}) satisfies Action
 };

@@ -48,12 +48,7 @@ export const add = async (blog: InitializableBlog) => {
 	await container.items.create({ type: 'content', ...blog });
 };
 
-export const remove = async (slug: string) => {
+export const remove = async (id: string, slug: string) => {
 	const container = await getContainer();
-	const { resources } = await container.items
-		.query(`SELECT * from c where c.type = 'content' and c.slug = "${slug}"`)
-		.fetchAll();
-	resources.forEach((blog) => {
-		container.item(blog.id, blog.slug).delete();
-	});
+	container.item(id, slug).delete();
 };
