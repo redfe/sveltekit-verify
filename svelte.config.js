@@ -15,11 +15,15 @@ const config = {
 						route: '/login',
 						redirect: '/.auth/login/github',
 						allowedRoles: ['admin']
+					},
+					{
+						route: '/*',
+						allowedRoles: ['admin']
 					}
 				],
 				responseOverrides: {
 					401: {
-						redirect: '/login',
+						redirect: '/.auth/login/github?post_login_redirect_uri=.referrer',
 						statusCode: 302
 					}
 				}
