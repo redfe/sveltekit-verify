@@ -1,13 +1,18 @@
 <script lang="ts">
 	import type { BlogSummary } from '$lib/types';
 	export let data: { summaries: [BlogSummary] };
+	export let form: any;
 </script>
+
+{#if form?.error}
+	<p class="error">{form.error}</p>
+{/if}
 
 <form method="POST" action="?/add">
 	<ul>
-		<li>slug:<input type="text" name="slug" /></li>
-		<li>title:<input type="text" name="title" /></li>
-		<li>content:<input type="text" name="content" /></li>
+		<li>slug:<input type="text" name="slug" value={form?.slug ?? ''} required /></li>
+		<li>title:<input type="text" name="title" value={form?.title ?? ''} required /></li>
+		<li>content:<input type="text" name="content" value={form?.content ?? ''} /></li>
 	</ul>
 	<button>add</button>
 </form>
@@ -23,3 +28,9 @@
 		</li>
 	{/each}
 </ul>
+
+<style>
+	.error {
+		color: red;
+	}
+</style>
