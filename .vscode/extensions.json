@@ -1,9 +1,0 @@
-{
-	"recommendations": [
-		"svelte.svelte-vscode",
-		"dbaeumer.vscode-eslint",
-		"esbenp.prettier-vscode",
-		"oderwat.indent-rainbow",
-		"pkief.material-icon-theme"
-	]
-}
