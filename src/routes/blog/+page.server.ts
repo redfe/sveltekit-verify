@@ -1,6 +1,6 @@
 import type { PageServerLoad, Action } from './$types';
 import type { Blog, BlogSummary } from '$lib/types';
-import type {} from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import * as db from '$lib/server/database';
 
 export const load = (async ({ locals }) => {
