@@ -8,22 +8,7 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: azure({
-			customStaticWebAppConfig: {
-				routes: [
-					{
-						route: '/blog/*',
-						allowedRoles: ['authenticated']
-					}
-				],
-				responseOverrides: {
-					401: {
-						redirect: '/.auth/login/github?post_login_redirect_uri=.referrer',
-						statusCode: 302
-					}
-				}
-			}
-		})
+		adapter: azure()
 	}
 };
 
