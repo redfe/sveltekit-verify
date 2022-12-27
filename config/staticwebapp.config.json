@@ -1,6 +1,10 @@
 {
 	"routes": [
 		{
+			"route": "/blog/*",
+			"allowedRoles": ["authenticated"]
+		},
+		{
 			"route": "*",
 			"methods": ["POST", "PUT", "DELETE"],
 			"rewrite": "/api/__render",
@@ -14,11 +18,13 @@
 		},
 		{
 			"route": "/index.html",
-			"rewrite": "/api/__render"
+			"rewrite": "/api/__render",
+			"allowedRoles": ["authenticated"]
 		},
 		{
 			"route": "/",
-			"rewrite": "/api/__render"
+			"rewrite": "/api/__render",
+			"allowedRoles": ["authenticated"]
 		}
 	],
 	"responseOverrides": {
