@@ -6,9 +6,11 @@ export const handle = (async ({ event, resolve }) => {
 		event.locals.user = JSON.parse(env.DEV_USER);
 	} else {
 		const header = event.request.headers.get('x-ms-client-principal');
+		console.log('x-ms-client-principal', header);
 		if (header) {
 			const encoded = Buffer.from(header ?? '', 'base64');
 			const decoded = encoded.toString('ascii');
+			console.log('decoded', decoded);
 			event.locals.user = JSON.parse(decoded);
 		}
 	}
