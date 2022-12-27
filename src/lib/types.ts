@@ -5,9 +5,10 @@ export interface BlogSummary {
 }
 
 export interface InitializableBlog {
+	user_id: string;
 	slug: string;
 	title: string;
-	content: string;
+	content: string | null;
 	postDateTime: Date;
 }
 

@@ -4,8 +4,6 @@ import { fail } from '@sveltejs/kit';
 import * as db from '$lib/server/database';
 
 export const load = (async ({ locals }) => {
-	console.log('######', locals.user);
-
 	const posts = await db.getAll();
 
 	const summaries: BlogSummary[] = posts.map((post) => ({
@@ -18,9 +16,10 @@ export const load = (async ({ locals }) => {
 }) satisfies PageServerLoad;
 
 export const actions = {
-	add: (async ({ request }) => {
+	add: (async ({ request, locals }) => {
 		const data = await request.formData();
 		const blog: InitializableBlog = {
+			user_id: locals.user.id,
 			slug: data.get('slug') as string,
 			title: data.get('title') as string,
 			content: data.get('content') as string,
@@ -29,7 +28,6 @@ export const actions = {
 		try {
 			await db.add(blog);
 		} catch (error: any) {
-			console;
 			const message = error.code === 409 ? 'slug が重複しています' : 'エラーです';
 			return fail(error.code, {
 				error: message,

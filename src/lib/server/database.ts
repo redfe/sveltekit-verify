@@ -1,14 +1,14 @@
 import type { Blog, InitializableBlog } from '$lib/types';
 import { CosmosClient } from '@azure/cosmos';
-import { COSMOS_KEY, COSMOS_ENDPOINT } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
-const key = COSMOS_KEY;
-const endpoint = COSMOS_ENDPOINT;
+const key = env.COSMOS_KEY;
+const endpoint = env.COSMOS_ENDPOINT;
 
 const databaseName = 'misc';
 const containerName = 'blogs';
-const partitionKeyPath = ['/slug'];
-const uniqueKeyPath = ['/slug', '/type'];
+const partitionKeyPath = ['/user_id'];
+const uniqueKeyPath = ['/user_id', '/slug', '/type'];
 let cosmosClient: CosmosClient;
 
 const getDatabase = async () => {
