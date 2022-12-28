@@ -2,12 +2,14 @@
 	"routes": [
 		{
 			"route": "*",
+			"methods": ["GET"],
 			"allowedRoles": ["authenticated"]
 		},
 		{
 			"route": "*",
 			"methods": ["POST", "PUT", "DELETE"],
-			"rewrite": "/api/__render"
+			"rewrite": "/api/__render",
+			"allowedRoles": ["authenticated"]
 		},
 		{
 			"route": "/_app/immutable/*",
