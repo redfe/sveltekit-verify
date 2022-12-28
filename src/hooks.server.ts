@@ -12,7 +12,7 @@ export const handle = (async ({ event, resolve }) => {
 			const decoded = encoded.toString('ascii');
 			//console.log('decoded', decoded);
 			const user: any = JSON.parse(decoded);
-			event.locals.user = { id: user.id, name: user.userDetails };
+			event.locals.user = { id: user.userId, name: user.userDetails };
 			console.log('user', event.locals.user);
 		}
 	}
