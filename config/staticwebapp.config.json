@@ -1,10 +1,6 @@
 {
 	"routes": [
 		{
-			"route": "/blog/*",
-			"allowedRoles": ["authenticated"]
-		},
-		{
 			"route": "*",
 			"methods": ["POST", "PUT", "DELETE"],
 			"rewrite": "/api/__render",
