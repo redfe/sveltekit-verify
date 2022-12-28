@@ -4,7 +4,6 @@ import { fail } from '@sveltejs/kit';
 import * as db from '$lib/server/database';
 
 export const load = (async ({ locals }) => {
-	console.log('### user at load', locals.user);
 	const posts = await db.getAll(locals.user.id);
 
 	const summaries: BlogSummary[] = posts.map((post) => ({
