@@ -10,7 +10,7 @@ export const handle = (async ({ event, resolve }) => {
 		if (header) {
 			const encoded = Buffer.from(header ?? '', 'base64');
 			const decoded = encoded.toString('ascii');
-			//console.log('decoded', decoded);
+			console.log('decoded', decoded);
 			const user: any = JSON.parse(decoded);
 			event.locals.user = { id: user.userId, name: user.userDetails };
 			console.log('user', event.locals.user);
