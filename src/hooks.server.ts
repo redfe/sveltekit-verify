@@ -13,6 +13,7 @@ export const handle = (async ({ event, resolve }) => {
 			//console.log('decoded', decoded);
 			const user: any = JSON.parse(decoded);
 			event.locals.user = { id: user.id, name: user.userDetails };
+			console.log('user', event.locals.user);
 		}
 	}
 
