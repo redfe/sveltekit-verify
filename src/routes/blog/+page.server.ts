@@ -4,7 +4,7 @@ import { fail } from '@sveltejs/kit';
 import * as db from '$lib/server/database';
 
 export const load = (async ({ locals }) => {
-	const posts = await db.getAll();
+	const posts = await db.getAll(locals.user.id);
 
 	const summaries: BlogSummary[] = posts.map((post) => ({
 		id: post.id,
@@ -35,8 +35,8 @@ export const actions = {
 			});
 		}
 	}) satisfies Action,
-	remove: (async ({ request }) => {
+	remove: (async ({ request, locals }) => {
 		const data = await request.formData();
-		await db.remove(data.get('id') as string, data.get('slug') as string);
+		await db.remove(data.get('id') as string, locals.user.id);
 	}) satisfies Action
 };

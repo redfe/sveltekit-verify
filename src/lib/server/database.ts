@@ -37,10 +37,10 @@ const getContainer = async () => {
 	return container;
 };
 
-export const getAll = async (): Promise<Blog[]> => {
+export const getAll = async (userId: string): Promise<Blog[]> => {
 	const container = await getContainer();
 	const { resources } = await container.items
-		.query("SELECT * from c where c.type='content'")
+		.query(`SELECT * from c where c.type='content' and c.user_id='${userId}'`)
 		.fetchAll();
 
 	return resources;
@@ -51,7 +51,7 @@ export const add = async (blog: InitializableBlog) => {
 	await container.items.create({ type: 'content', ...blog });
 };
 
-export const remove = async (id: string, slug: string) => {
+export const remove = async (id: string, userId: string) => {
 	const container = await getContainer();
-	container.item(id, slug).delete();
+	container.item(id, userId).delete();
 };
