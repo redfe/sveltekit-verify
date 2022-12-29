@@ -2,10 +2,6 @@
 	"routes": [
 		{
 			"route": "*",
-			"methods": ["GET"]
-		},
-		{
-			"route": "*",
 			"methods": ["POST", "PUT", "DELETE"],
 			"rewrite": "/api/__render",
 			"allowedRoles": ["authenticated"]
