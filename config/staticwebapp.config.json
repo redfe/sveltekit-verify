@@ -2,14 +2,8 @@
 	"routes": [
 		{
 			"route": "*",
-			"methods": ["GET"],
-			"allowedRoles": ["authenticated"]
-		},
-		{
-			"route": "*",
 			"methods": ["POST", "PUT", "DELETE"],
-			"rewrite": "/api/__render",
-			"allowedRoles": ["authenticated"]
+			"rewrite": "/api/__render"
 		},
 		{
 			"route": "/_app/immutable/*",
@@ -26,17 +20,6 @@
 			"rewrite": "/api/__render"
 		}
 	],
-	"responseOverrides": {
-		"401": {
-			"redirect": "/.auth/login/github?post_login_redirect_uri=.referrer",
-			"statusCode": 302
-		}
-	},
-	"globalHeaders": {
-		"X-Content-Type-Options": "nosniff",
-		"X-Frame-Options": "DENY",
-		"Content-Security-Policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
-	},
 	"navigationFallback": {
 		"rewrite": "/api/__render"
 	},
