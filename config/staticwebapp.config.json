@@ -19,13 +19,11 @@
 		},
 		{
 			"route": "/index.html",
-			"rewrite": "/api/__render",
-			"allowedRoles": ["authenticated"]
+			"rewrite": "/api/__render"
 		},
 		{
 			"route": "/",
-			"rewrite": "/api/__render",
-			"allowedRoles": ["authenticated"]
+			"rewrite": "/api/__render"
 		}
 	],
 	"responseOverrides": {
