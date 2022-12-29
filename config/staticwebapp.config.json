@@ -14,11 +14,18 @@
 		},
 		{
 			"route": "/index.html",
-			"rewrite": "/api/__render"
+			"rewrite": "/api/__render",
+			"allowedRoles": ["authenticated"]
 		},
 		{
 			"route": "/",
-			"rewrite": "/api/__render"
+			"rewrite": "/api/__render",
+			"allowedRoles": ["authenticated"]
+		},
+		{
+			"route": "*",
+			"methods": ["GET"],
+			"allowedRoles": ["authenticated"]
 		}
 	],
 	"responseOverrides": {
