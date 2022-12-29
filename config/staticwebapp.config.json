@@ -32,6 +32,11 @@
 			"statusCode": 302
 		}
 	},
+	"globalHeaders": {
+		"X-Content-Type-Options": "nosniff",
+		"X-Frame-Options": "DENY",
+		"Content-Security-Policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
+	},
 	"navigationFallback": {
 		"rewrite": "/api/__render"
 	},
