@@ -2,8 +2,7 @@
 	"routes": [
 		{
 			"route": "*",
-			"methods": ["GET"],
-			"allowedRoles": ["authenticated"]
+			"methods": ["GET"]
 		},
 		{
 			"route": "*",
