@@ -4,7 +4,7 @@
 declare namespace App {
 	// interface Error {}
 	interface Locals {
-		user: { id: string; name: string };
+		user: import('$lib/types').User;
 	}
 	// interface PageData {}
 	// interface Platform {}

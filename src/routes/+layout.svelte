@@ -1,5 +1,6 @@
 <script lang="ts">
-	export let data: { user: { id: string; name: string } };
+	import type { User } from '$lib/types';
+	export let data: { user: User };
 </script>
 
 <nav>
