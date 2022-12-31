@@ -1,4 +1,4 @@
-import type { PageServerLoad, Action } from './$types';
+import type { PageServerLoad, Actions } from './$types';
 import type { BlogSummary, InitializableBlog } from '$lib/types';
 import { fail } from '@sveltejs/kit';
 import * as db from '$lib/server/database';
@@ -15,8 +15,8 @@ export const load = (async ({ locals }) => {
 	return { summaries };
 }) satisfies PageServerLoad;
 
-export const actions = {
-	add: (async ({ request, locals }) => {
+export const actions: Actions = {
+	add: async ({ request, locals }) => {
 		const data = await request.formData();
 		const blog: InitializableBlog = {
 			user_id: locals.user.id,
@@ -34,9 +34,9 @@ export const actions = {
 				...blog
 			});
 		}
-	}) satisfies Action,
-	remove: (async ({ request, locals }) => {
+	},
+	remove: async ({ request, locals }) => {
 		const data = await request.formData();
 		await db.remove(data.get('id') as string, locals.user.id);
-	}) satisfies Action
+	}
 };
