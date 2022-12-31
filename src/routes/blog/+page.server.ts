@@ -15,7 +15,7 @@ export const load = (async ({ locals }) => {
 	return { summaries };
 }) satisfies PageServerLoad;
 
-export const actions: Actions = {
+export const actions = {
 	add: async ({ request, locals }) => {
 		const data = await request.formData();
 		const blog: InitializableBlog = {
@@ -39,4 +39,4 @@ export const actions: Actions = {
 		const data = await request.formData();
 		await db.remove(data.get('id') as string, locals.user.id);
 	}
-};
+} satisfies Actions;
