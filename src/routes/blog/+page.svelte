@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { BlogSummary } from '$lib/types';
+	import type { PageData, ActionData } from './$types';
 	import { enhance } from '$app/forms';
-	import { fly, slide } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 
-	export let data: { summaries: [BlogSummary] };
-	export let form: any;
+	export let data: PageData;
+	export let form: ActionData;
 	let saving = false;
 	let deleting: string[] = [];
 </script>

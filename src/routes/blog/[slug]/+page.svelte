@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Blog } from '$lib/types';
-	export let data: { post: Blog };
+	import type { PageData } from './$types';
+	export let data: PageData;
 </script>
 
 <h2>{data.post.title}</h2>
