@@ -2,6 +2,11 @@ import type { Handle } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 
 export const handle = (async ({ event, resolve }) => {
+	console.log('Request:', {
+		method: event.request.method,
+		url: event.request.url,
+		contentType: event.request.headers.get('content-type')
+	});
 	event.locals.user = { id: '', name: '' };
 	if (env.DEV_USER) {
 		event.locals.user = JSON.parse(env.DEV_USER);
