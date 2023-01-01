@@ -8,11 +8,7 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: azure({
-			esbuildOptions: {
-				external: ['node-fetch']
-			}
-		})
+		adapter: azure()
 	}
 };
 
