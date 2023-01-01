@@ -8,8 +8,6 @@ export async function main() {
 
 	const AZURE_STORAGE_CONNECTION_STRING = env.AZURE_STORAGE_CONNECTION_STRING;
 
-	console.log('#######', AZURE_STORAGE_CONNECTION_STRING);
-
 	if (!AZURE_STORAGE_CONNECTION_STRING) {
 		throw Error('Azure Storage Connection string not found');
 	}
