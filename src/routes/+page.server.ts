@@ -3,7 +3,6 @@ import { main } from './storage-demo';
 
 export const actions = {
 	runBlobDemo: async ({}) => {
-		console.log('### start blob demo!');
 		try {
 			await main();
 			return { message: 'success!' };
