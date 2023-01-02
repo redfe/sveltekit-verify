@@ -40,6 +40,7 @@ function getContainerClient(containerName: string) {
 	return containerClient;
 }
 
+// 参考: https://learn.microsoft.com/ja-jp/azure/storage/blobs/storage-quickstart-blobs-nodejs?tabs=managed-identity%2Croles-azure-portal%2Csign-in-azure-cli
 export async function main() {
 	// Create a unique name for the container
 	const containerName = 'quickstart' + crypto.randomUUID();
