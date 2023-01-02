@@ -1,9 +1,23 @@
-import { BlobServiceClient } from '@azure/storage-blob';
+import { BlobSASPermissions, BlobServiceClient } from '@azure/storage-blob';
 import crypto from 'crypto';
-import { DefaultAzureCredential } from '@azure/identity';
 import { env } from '$env/dynamic/private';
 
-export async function main() {
+export async function getSasUrl(userId: string, fileName: string) {
+	const containerName = 'blog-attachments';
+	const containerClient = getContainerClient(containerName);
+
+	const blockBlobClient = containerClient.getBlockBlobClient(
+		userId + '/' + crypto.randomUUID() + '/' + fileName
+	);
+	return blockBlobClient.generateSasUrl({
+		permissions: BlobSASPermissions.from({
+			write: true
+		}),
+		expiresOn: new Date(new Date().setHours(new Date().getHours() + 1))
+	});
+}
+
+function getBlobServiceClient() {
 	console.log('Azure Blob storage v12 - JavaScript quickstart sample');
 
 	const AZURE_STORAGE_CONNECTION_STRING = env.AZURE_STORAGE_CONNECTION_STRING;
@@ -15,15 +29,26 @@ export async function main() {
 	// Create the BlobServiceClient object with connection string
 	const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
 
+	return blobServiceClient;
+}
+
+function getContainerClient(containerName: string) {
+	const blobServiceClient = getBlobServiceClient();
+	// Get a reference to a container
+	const containerClient = blobServiceClient.getContainerClient(containerName);
+
+	return containerClient;
+}
+
+export async function main() {
 	// Create a unique name for the container
 	const containerName = 'quickstart' + crypto.randomUUID();
+	const containerClient = getContainerClient(containerName);
 
+	// Create the container
 	console.log('\nCreating container...');
 	console.log('\t', containerName);
 
-	// Get a reference to a container
-	const containerClient = blobServiceClient.getContainerClient(containerName);
-	// Create the container
 	const createContainerResponse = await containerClient.create();
 	console.log(
 		`Container was created successfully.\n\trequestId:${createContainerResponse.requestId}\n\tURL: ${containerClient.url}`

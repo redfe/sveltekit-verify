@@ -11,6 +11,9 @@
 		<li>
 			<a href="/blog">Blog</a>
 		</li>
+		<li>
+			<a href="/azure_blob_storage">Azure Blob Storage</a>
+		</li>
 	</ul>
 	<ul class="username">
 		<li>
