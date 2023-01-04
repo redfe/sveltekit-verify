@@ -40,10 +40,62 @@ const getContainer = async () => {
 export const getAll = async (userId: string): Promise<Blog[]> => {
 	const container = await getContainer();
 	const { resources } = await container.items
-		.query(`SELECT * from c where c.type='content' and c.user_id='${userId}'`)
+		.query({
+			query: "SELECT * from c where c.type='content' and c.user_id=@user_id",
+			parameters: [
+				{
+					name: '@user_id',
+					value: userId
+				}
+			]
+		})
 		.fetchAll();
 
 	return resources;
+};
+
+export const getPage = async (
+	userId: string,
+	offset: number,
+	limit: number
+): Promise<{ blogs: Blog[]; allCount: number }> => {
+	const container = await getContainer();
+	const { resources } = await container.items
+		.query({
+			query:
+				"SELECT * from c where c.type='content' and c.user_id=@user_id order by c.postDateTime desc offset @offset limit @limit",
+			parameters: [
+				{
+					name: '@user_id',
+					value: userId
+				},
+				{
+					name: '@offset',
+					value: offset
+				},
+				{
+					name: '@limit',
+					value: limit
+				}
+			]
+		})
+		.fetchAll();
+
+	const countResponse = await container.items
+		.query({
+			query: "SELECT COUNT(1) as count from c where c.type='content' and c.user_id=@user_id",
+			parameters: [
+				{
+					name: '@user_id',
+					value: userId
+				}
+			]
+		})
+		.fetchAll();
+
+	const allCount = countResponse.resources[0].count;
+
+	return { blogs: resources, allCount };
 };
 
 export const add = async (blog: InitializableBlog) => {
