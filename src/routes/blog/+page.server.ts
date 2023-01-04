@@ -2,17 +2,23 @@ import type { PageServerLoad, Actions } from './$types';
 import type { BlogSummary, InitializableBlog } from '$lib/types';
 import { fail } from '@sveltejs/kit';
 import * as db from '$lib/server/database';
+import { createPage, calcCurrentPage, calcOffset } from '$lib/server/pagination';
 
-export const load = (async ({ locals }) => {
-	const posts = await db.getAll(locals.user.id);
+const PAGE_SIZE = 3;
 
-	const summaries: BlogSummary[] = posts.map((post) => ({
+export const load = (async ({ locals, request, url }) => {
+	let currentPage = calcCurrentPage(url.searchParams.get('page'));
+	const offset = calcOffset(currentPage, PAGE_SIZE);
+	const { blogs, allCount } = await db.getPage(locals.user.id, offset, PAGE_SIZE);
+	const summaries: BlogSummary[] = blogs.map((post) => ({
 		id: post.id,
 		slug: post.slug,
 		title: post.title
 	}));
 
-	return { summaries };
+	return {
+		page: createPage(summaries, allCount, PAGE_SIZE, currentPage)
+	};
 }) satisfies PageServerLoad;
 
 export const actions = {

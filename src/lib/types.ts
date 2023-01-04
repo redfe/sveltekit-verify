@@ -20,3 +20,11 @@ export interface InitializableBlog {
 export interface Blog extends InitializableBlog {
 	id: string;
 }
+
+export interface Page<ITEM> {
+	items: ITEM[];
+	currentPage: number;
+	maxPage: number;
+	pageSize: number;
+	hasNext: boolean;
+}

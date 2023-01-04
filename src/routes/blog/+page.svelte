@@ -2,6 +2,7 @@
 	import type { PageData, ActionData } from './$types';
 	import { enhance } from '$app/forms';
 	import { fly } from 'svelte/transition';
+	import PaginationNav from '$lib/components/PaginationNav.svelte';
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -37,8 +38,13 @@
 	</ul>
 	<button>add</button>
 </form>
+
+<br />
+
+<PaginationNav page={data.page} createUrl={(targetPage) => `/blog?page=${targetPage}`} />
+
 <ul>
-	{#each data.summaries.filter((post) => !deleting.includes(post.slug)) as post (post.id)}
+	{#each data.page.items.filter((post) => !deleting.includes(post.slug)) as post (post.id)}
 		<!-- out: を使うと <a> をクリックしたときに遷移先の画面が一時的に表示されてしまう-->
 		<li in:fly={{ y: 20 }}>
 			<form
