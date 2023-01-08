@@ -12,7 +12,6 @@ export const load = (async ({ locals, request, url }) => {
 	const { blogs, allCount } = await db.getPage(locals.user.id, offset, PAGE_SIZE);
 	const summaries: BlogSummary[] = blogs.map((post) => ({
 		id: post.id,
-		slug: post.slug,
 		title: post.title
 	}));
 
@@ -26,7 +25,6 @@ export const actions = {
 		const data = await request.formData();
 		const blog: InitializableBlog = {
 			user_id: locals.user.id,
-			slug: data.get('slug') as string,
 			title: data.get('title') as string,
 			content: data.get('content') as string,
 			postDateTime: new Date()
@@ -34,7 +32,7 @@ export const actions = {
 		try {
 			await db.add(blog);
 		} catch (error: any) {
-			const message = error.code === 409 ? 'slug が重複しています' : 'エラーです';
+			const message = 'エラーです';
 			return fail(error.code, {
 				error: message,
 				...blog
