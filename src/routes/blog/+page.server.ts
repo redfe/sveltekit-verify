@@ -38,9 +38,5 @@ export const actions = {
 				...blog
 			});
 		}
-	},
-	remove: async ({ request, locals }) => {
-		const data = await request.formData();
-		await db.remove(data.get('id') as string, locals.user.id);
 	}
 } satisfies Actions;

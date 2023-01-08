@@ -3,11 +3,16 @@
 	import { enhance } from '$app/forms';
 	import { fly } from 'svelte/transition';
 	import PaginationNav from '$lib/components/PaginationNav.svelte';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 	export let form: ActionData;
 	let saving = false;
 	let deleting: string[] = [];
+
+	if (data.page.items.length === 0 && data.page.currentPage !== 1) {
+		goto(`/blog?page=${data.page.currentPage - 1}`);
+	}
 </script>
 
 {#if form?.error}
@@ -32,7 +37,9 @@
 	}}
 >
 	<ul>
-		<li>title:<br /><input type="text" name="title" value={form?.title ?? ''} required /></li>
+		<li>
+			title:<br /><input autofocus type="text" name="title" value={form?.title ?? ''} required />
+		</li>
 		<li>content:<br /><textarea name="content" value={form?.content ?? ''} /></li>
 	</ul>
 	<button>add</button>
@@ -46,21 +53,6 @@
 	{#each data.page.items.filter((post) => !deleting.includes(post.id)) as post (post.id)}
 		<!-- out: を使うと <a> をクリックしたときに遷移先の画面が一時的に表示されてしまう-->
 		<li in:fly={{ y: 20 }}>
-			<form
-				method="POST"
-				action="?/remove"
-				use:enhance={() => {
-					deleting = [...deleting, post.id];
-					return async ({ update }) => {
-						await update();
-						deleting = deleting.filter((id) => id !== post.id);
-					};
-				}}
-			>
-				<input type="hidden" name="id" value={post.id} />
-				<button>x</button>
-			</form>
-
 			<a href="/blog/{post.id}">{post.title}</a>
 		</li>
 	{/each}
@@ -69,8 +61,5 @@
 <style>
 	.error {
 		color: red;
-	}
-	li > form {
-		display: inline;
 	}
 </style>
