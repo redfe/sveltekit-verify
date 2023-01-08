@@ -5,4 +5,4 @@
 
 <h2>{data.post.title}</h2>
 
-<div>{data.post.content}</div>
+<pre>{data.post.content}</pre>

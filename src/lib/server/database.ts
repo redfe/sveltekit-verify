@@ -8,7 +8,11 @@ const endpoint = env.COSMOS_ENDPOINT;
 const databaseName = 'misc';
 const containerName = 'blogs';
 const partitionKeyPath = ['/user_id'];
-const uniqueKeyPath = ['/user_id', '/slug', '/type'];
+
+enum Type {
+	content
+}
+
 let cosmosClient: CosmosClient;
 
 const getDatabase = async () => {
@@ -25,13 +29,6 @@ const getContainer = async () => {
 		id: containerName,
 		partitionKey: {
 			paths: partitionKeyPath
-		},
-		uniqueKeyPolicy: {
-			uniqueKeys: [
-				{
-					paths: uniqueKeyPath
-				}
-			]
 		}
 	});
 	return container;
@@ -41,8 +38,12 @@ export const getAll = async (userId: string): Promise<Blog[]> => {
 	const container = await getContainer();
 	const { resources } = await container.items
 		.query({
-			query: "SELECT * from c where c.type='content' and c.user_id=@user_id",
+			query: 'SELECT * from c where c.type=@type and c.user_id=@user_id',
 			parameters: [
+				{
+					name: '@type',
+					value: Type.content
+				},
 				{
 					name: '@user_id',
 					value: userId
@@ -63,8 +64,12 @@ export const getPage = async (
 	const { resources } = await container.items
 		.query({
 			query:
-				"SELECT * from c where c.type='content' and c.user_id=@user_id order by c.postDateTime desc offset @offset limit @limit",
+				'SELECT * from c where c.type=@type and c.user_id=@user_id order by c.postDateTime desc offset @offset limit @limit',
 			parameters: [
+				{
+					name: '@type',
+					value: Type.content
+				},
 				{
 					name: '@user_id',
 					value: userId
@@ -83,8 +88,12 @@ export const getPage = async (
 
 	const countResponse = await container.items
 		.query({
-			query: "SELECT COUNT(1) as count from c where c.type='content' and c.user_id=@user_id",
+			query: 'SELECT COUNT(1) as count from c where c.type=@type and c.user_id=@user_id',
 			parameters: [
+				{
+					name: '@type',
+					value: Type.content
+				},
 				{
 					name: '@user_id',
 					value: userId
@@ -98,9 +107,34 @@ export const getPage = async (
 	return { blogs: resources, allCount };
 };
 
+export const get = async (id: string, userId: string) => {
+	const container = await getContainer();
+	const { resources } = await container.items
+		.query({
+			query: 'SELECT * from c where c.type=@type and c.user_id=@user_id and c.id=@id',
+			parameters: [
+				{
+					name: '@type',
+					value: Type.content
+				},
+				{
+					name: '@user_id',
+					value: userId
+				},
+				{
+					name: '@id',
+					value: id
+				}
+			]
+		})
+		.fetchAll();
+
+	return resources ? resources[0] : null;
+};
+
 export const add = async (blog: InitializableBlog) => {
 	const container = await getContainer();
-	await container.items.create({ type: 'content', ...blog });
+	await container.items.create({ type: Type.content, ...blog });
 };
 
 export const remove = async (id: string, userId: string) => {

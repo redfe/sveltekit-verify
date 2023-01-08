@@ -32,9 +32,8 @@
 	}}
 >
 	<ul>
-		<li>slug:<input type="text" name="slug" value={form?.slug ?? ''} required /></li>
-		<li>title:<input type="text" name="title" value={form?.title ?? ''} required /></li>
-		<li>content:<input type="text" name="content" value={form?.content ?? ''} /></li>
+		<li>title:<br /><input type="text" name="title" value={form?.title ?? ''} required /></li>
+		<li>content:<br /><textarea name="content" value={form?.content ?? ''} /></li>
 	</ul>
 	<button>add</button>
 </form>
@@ -44,7 +43,7 @@
 <PaginationNav page={data.page} createUrl={(targetPage) => `/blog?page=${targetPage}`} />
 
 <ul>
-	{#each data.page.items.filter((post) => !deleting.includes(post.slug)) as post (post.id)}
+	{#each data.page.items.filter((post) => !deleting.includes(post.id)) as post (post.id)}
 		<!-- out: を使うと <a> をクリックしたときに遷移先の画面が一時的に表示されてしまう-->
 		<li in:fly={{ y: 20 }}>
 			<form
@@ -59,11 +58,10 @@
 				}}
 			>
 				<input type="hidden" name="id" value={post.id} />
-				<input type="hidden" name="slug" value={post.slug} />
 				<button>x</button>
 			</form>
 
-			<a href="/blog/{post.slug}">{post.title}</a>
+			<a href="/blog/{post.id}">{post.title}</a>
 		</li>
 	{/each}
 </ul>
