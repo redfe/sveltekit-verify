@@ -38,7 +38,9 @@
 >
 	<ul>
 		<li>
-			title:<br /><input autofocus type="text" name="title" value={form?.title ?? ''} required />
+			title:<br />
+			<!-- svelte-ignore a11y-autofocus -->
+			<input autofocus type="text" name="title" value={form?.title ?? ''} required />
 		</li>
 		<li>content:<br /><textarea name="content" value={form?.content ?? ''} /></li>
 	</ul>
