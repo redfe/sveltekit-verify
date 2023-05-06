@@ -11,13 +11,15 @@
 		".devcontainer": true,
 		".github": true,
 		".svelte-kit": true,
-		"bulid": true,
+		"build": true,
 		"node_modules": true,
 		".eslintignore": true,
 		".eslintrc.cjs": true,
 		".gitignore": true,
 		".npmrc": true,
 		".prettierignore": true,
-		".prettierrc": true
+		".prettierrc": true,
+		"playwright-report": true,
+		"test-results": true
 	}
 }
