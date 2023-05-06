@@ -67,7 +67,12 @@
 	{/if}
 	<input type="hidden" name="fileName" bind:this={fileName} />
 	<button type="submit" style="display:none;" bind:this={getSasUrlSubmitButton}>submit</button>
-	<button on:click|preventDefault={() => fileInput.click()}>upload to blob storage</button>
+	<button
+		on:click|preventDefault={() => {
+			fileInput.value = '';
+			fileInput.click();
+		}}>upload to blob storage</button
+	>
 </form>
 
 {#if blobUrl}
