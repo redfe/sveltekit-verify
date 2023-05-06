@@ -21,7 +21,8 @@
 				"oderwat.indent-rainbow",
 				"pkief.material-icon-theme",
 				"ardenivanov.svelte-intellisense",
-				"fivethree.vscode-svelte-snippets"
+				"fivethree.vscode-svelte-snippets",
+				"amodio.tsl-problem-matcher"
 			]
 		}
 	}
