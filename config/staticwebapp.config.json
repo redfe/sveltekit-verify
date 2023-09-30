@@ -30,7 +30,7 @@
 	],
 	"responseOverrides": {
 		"401": {
-			"redirect": "/.auth/login/aadb2c/callback?post_login_redirect_uri=.referrer",
+			"redirect": "/.auth/login/aadb2c",
 			"statusCode": 302
 		}
 	},
