@@ -1,7 +1,7 @@
 {
 	"routes": [
 		{
-			"route": "*",
+			"route": "/*",
 			"methods": ["POST", "PUT", "DELETE"],
 			"rewrite": "/api/__render",
 			"allowedRoles": ["authenticated"]
@@ -23,7 +23,7 @@
 			"allowedRoles": ["authenticated"]
 		},
 		{
-			"route": "*",
+			"route": "/*",
 			"methods": ["GET"],
 			"allowedRoles": ["authenticated"]
 		}
