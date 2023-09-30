@@ -1,4 +1,50 @@
 {
+	"routes": [
+		{
+			"route": "*",
+			"methods": ["POST", "PUT", "DELETE"],
+			"rewrite": "/api/__render",
+			"allowedRoles": ["authenticated"]
+		},
+		{
+			"route": "/_app/immutable/*",
+			"headers": {
+				"cache-control": "public, immutable, max-age=31536000"
+			}
+		},
+		{
+			"route": "/index.html",
+			"rewrite": "/api/__render",
+			"allowedRoles": ["authenticated"]
+		},
+		{
+			"route": "/",
+			"rewrite": "/api/__render",
+			"allowedRoles": ["authenticated"]
+		},
+		{
+			"route": "*",
+			"methods": ["GET"],
+			"allowedRoles": ["authenticated"]
+		}
+	],
+	"responseOverrides": {
+		"401": {
+			"redirect": "/.auth/login/aadb2c",
+			"statusCode": 302
+		}
+	},
+	"globalHeaders": {
+		"X-Content-Type-Options": "nosniff",
+		"X-Frame-Options": "DENY",
+		"Content-Security-Policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
+	},
+	"navigationFallback": {
+		"rewrite": "/api/__render"
+	},
+	"platform": {
+		"apiRuntime": "node:16"
+	},
 	"auth": {
 		"identityProviders": {
 			"customOpenIdConnectProviders": {
@@ -20,20 +66,5 @@
 				}
 			}
 		}
-	},
-	"routes": [
-		{
-			"route": "/*",
-			"allowedRoles": ["authenticated"]
-		}
-	],
-	"responseOverrides": {
-		"401": {
-			"redirect": "/.auth/login/aadb2c",
-			"statusCode": 302
-		}
-	},
-	"platform": {
-		"apiRuntime": "node:16"
 	}
 }
