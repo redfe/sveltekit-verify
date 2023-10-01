@@ -62,6 +62,17 @@
 						"nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
 						"scopes": ["openid", "offline_access"],
 					}
+				},
+				"okta": {
+					"registration": {
+						"clientIdSettingName": "OKTA_PROVIDER_CLIENT_ID",
+						"clientCredential": {
+							"clientSecretSettingName": "OKTA_PROVIDER_CLIENT_SECRET"
+						},
+						"openIdConnectConfiguration": {
+							"wellKnownOpenIdConfiguration": "https://trial-2224060-admin.okta.com/.well-known/openid-configuration"
+						}
+					}
 				}
 			}
 		}
